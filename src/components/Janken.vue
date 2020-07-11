@@ -1,9 +1,9 @@
 <template>
   <div class="hello">
     <h1>Janken.vue</h1>
-    <p>結果：{{ score }}</p>
+    <p>結果：{{ resultMessage }}</p>
     <button v-on:click="gameStart" type="button" id="gameStart">ゲームスタート</button>
-    
+    <p>{{ score }}</p>
     <div class="imgArea"><img v-bind:src="src" alt=""></div>
     <ul>
             <li>
@@ -61,17 +61,26 @@ export default {
                     btn.setAttribute('disabled', true);
                 }
           document.getElementById('gameStart').removeAttribute('disabled')
-          //let button = e.target
-          //window.console.log(this.src)
-          //let resultNum = parseInt(this.imgList.indexOf(this.src), 10)
-          //let selectNum = parseInt(button.value, 10) /* 第一引数に渡した値を10進数に変換して返す */
-          //let kekkaNum = this.decisionJanken(selectNum, resultNum)
+             let button = event.target
+             window.console.log(this.src)
+            let resultNum = parseInt(this.imgList.indexOf(this.src), 10)
+            let selectNum = parseInt(button.value, 10) /* 第一引数に渡した値を10進数に変換して返す */
+            let kekkaNum = this.decisionJanken(selectNum, resultNum)
 
-          //window.console.log('勝ち負け(0 は負け, 1は勝ち,2は引き分け)→' + this.decisionJanken(selectNum, resultNum))
+            window.console.log('勝ち負け(0 は負け, 1は勝ち,2は引き分け)→' + this.decisionJanken(selectNum, resultNum))
+
+        if(kekkaNum == 1){
+         this.resultMessage = '勝ち！';
+         }else if(kekkaNum == 2){
+            this.resultMessage = '引き分け';
+        }else{
+            this.resultMessage = '負け';
+        }
       },
+      
       decisionJanken(myHand, cpuHand) {
                 let result = 0; // 0 は負け, 1は勝ち,2は引き分け
- 
+                
                 switch(myHand) {
                     case 0://自分がぐー(0)のとき
                     if(cpuHand===0){
@@ -101,8 +110,16 @@ export default {
                     }
                 }
                 return result;
-            }
-  }
+            },
+     incriment(){
+         this.$store.commit('incriment')
+     },
+},
+computed:{
+          score(){
+            return this.$store.getters.score
+          }
+    },
 }
 </script>
 

@@ -5,11 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    score:0
   },
   mutations: {
+    incriment: state => state.score
   },
   actions: {
   },
   modules: {
+  },
+  getters:{
+    score:state => {return state.score}
   }
 })
