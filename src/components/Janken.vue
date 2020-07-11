@@ -1,8 +1,9 @@
 <template>
   <div class="hello">
     <h1>Janken.vue</h1>
+    <p>結果：{{ score }}</p>
     <button v-on:click="gameStart" type="button" id="gameStart">ゲームスタート</button>
-    <p>{{ score }}</p>
+    
     <div class="imgArea"><img v-bind:src="src" alt=""></div>
     <ul>
             <li>
