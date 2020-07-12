@@ -8,7 +8,7 @@ export default new Vuex.Store({
     score:0
   },
   mutations: {
-    incriment: state => state.score
+    onSelected: state => state.score++
   },
   actions: {
   },

@@ -1,9 +1,9 @@
 <template>
   <div class="hello">
     <h1>Janken.vue</h1>
+    <p>{{ score }}回目</p>
     <p>結果：{{ resultMessage }}</p>
     <button v-on:click="gameStart" type="button" id="gameStart">ゲームスタート</button>
-    <p>{{ score }}</p>
     <div class="imgArea"><img v-bind:src="src" alt=""></div>
     <ul>
             <li>
@@ -76,6 +76,7 @@ export default {
         }else{
             this.resultMessage = '負け';
         }
+        this.$store.commit('onSelected')
       },
       
       decisionJanken(myHand, cpuHand) {
@@ -110,10 +111,9 @@ export default {
                     }
                 }
                 return result;
+                
             },
-     incriment(){
-         this.$store.commit('incriment')
-     },
+    
 },
 computed:{
           score(){
